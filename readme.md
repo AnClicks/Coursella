@@ -11,7 +11,7 @@ Zod Library is used for type validation.
 <br/>
 
 <p align="center">
-  <img src="/readme_assets/zod.png" alt="zod Screenshot" width="80%" />
+  <img src="/readme_assets/zod.jpeg" alt="zod Screenshot" width="80%" />
 </p>
 
 <br/>
@@ -55,7 +55,7 @@ This is where the concept of **salting** comes in.
 ## JWT Authentication
 
 <br/>
-
+Read about how JWT Authentication works here
 <p align="center">
   <img src="/readme_assets/auth.jpeg" alt="POST IMAGE" width="80%" />
 </p>
