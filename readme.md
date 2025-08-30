@@ -1,3 +1,4 @@
+
 # 🔐 Coursella (course selling app)
 My motivation for building was to understand best practices for backend developnent and handel security vulnerabilities
 Beautiful, secure, and type‑safe authentication boilerplate using **Zod** for validation, **Bcrypt** for password hashing, **JWT** for stateless auth, **MongoDB** for persistence, and **React** on the front‑end.
