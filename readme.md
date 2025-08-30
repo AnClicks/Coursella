@@ -10,7 +10,7 @@ Zod Library is used for type validation.
 
 <br/>
 
-<p align="center">
+<p align="left">
   <img src="/readme_assets/zod.jpeg" alt="zod Screenshot" width="40%" />
 </p>
 
@@ -22,7 +22,9 @@ Zod Library is used for type validation.
 
 <p align="center">
   <img src="/readme_assets/failedSignup.png" alt="Failed signup" width="45%" />
+  <p>Failed signup (zod validation)</p>
   <img src="/readme_assets/successSignup.png" alt="Success signup" width="45%" />
+  <p>succces signup (zod validation gives true)</p>
 </p>
 
 ---
