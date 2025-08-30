@@ -1,11 +1,10 @@
 require("dotenv").config()
-// console.log(process.env.MONGO_URI)
 const express = require("express");
 const {userRouter}= require("./routes/user");
 const { courseRouter } = require("./routes/course");
 const {adminRouter} = require("./routes/admin");
 const mongoose = require("mongoose");
-
+const {PORT} = require("./config")
 
 const app = express();
 
@@ -22,8 +21,8 @@ async function main() {
     // console.log(MONGO_URI);
     try{
         await mongoose.connect(MONGO_URI)
-        app.listen(3000,()=>{
-            console.log("listening to the 3000 port")
+        app.listen(PORT,()=>{
+            console.log(`Backend is running at: http://localhost:${PORT}/`)
         });
     }
     catch(e){

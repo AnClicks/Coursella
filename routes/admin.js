@@ -1,5 +1,4 @@
 const {Router} = require("express")
-const adminRouter=Router();
 const {AdminModel, CoursesModel} = require("../db")
 const express = require("express")
 const bcrypt = require("bcrypt");
@@ -7,6 +6,7 @@ const jwt = require("jsonwebtoken")
 const {adminMiddleware}=require("../middlewares/admin");
 const {JWT_ADMIN_PASSWORD}= require("../config")
 
+const adminRouter=Router();
 const app = express();
 
 //body parser middleware

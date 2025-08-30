@@ -11,15 +11,35 @@ const User = new Schema({
         unique:true,
         trim:true
     },
-    password:String,
+    password:{
+        type:String,
+        required:true,
+        trim:true
+    },
     firstName:String,
-    lastName:String
+    lastName:String,
+    // used the property of noSQL
+    PurchasedCourses: [
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:'Courses',
+        }
+    ]
 })
 
 const Admin = new Schema({
     id:ObjectId,
-    email:String,
-    password:String,
+    email:{
+        type:String,
+        required:true,
+        unique:true,
+        trim:true,
+    },
+    password:{
+        type:String,
+        required:true,
+        trim:true,
+    },
     firstName:String,
     lastName:String
 })
@@ -33,6 +53,8 @@ const Courses = new Schema({
     creatorId:ObjectId
  
 }) 
+
+//more SQL way
 const Purchase = new Schema({
     id:ObjectId,
     courseId:String,

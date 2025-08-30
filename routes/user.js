@@ -1,10 +1,9 @@
     const {Router} = require("express");
-    const mongoose= require("mongoose")
     const express = require("express")
     const bcrypt = require("bcrypt")
     const {UserModel} = require("../db")
     const jwt = require("jsonwebtoken");
-    // const { z } = require("zod");
+    const { z } = require("zod");
     const {JWT_USER_PASSWORD} = require("../config")
     const {userMiddleware} = require("../middlewares/user")
     const { PurchaseModel } = require( "../db")
@@ -12,7 +11,56 @@
     const userRouter = Router();
     const app = express();
     app.use(express.json())
-
+    
+    userRouter.post("/signup", async (req,res)=>{
+        //user details validation 
+        const requiredBody = z.object({
+             email: z.email(),
+             password: z.string()
+             .min(8,"Passowrd must be 8 character long")
+             .max(32,"Password must be less than 32 characters")
+             .regex(/[A-Z]/,"Password must have a upper letter")
+             .regex(/[a-z]/,"Password must have a small case letter")
+             .regex(/[^A-Za-z0-9]/,"Password must have a special character")
+                
+        })
+        
+        const parsedDatawithSuccess = requiredBody.safeParse(req.body);
+        // console.log(parsedDatawithSuccess)
+        if(!parsedDatawithSuccess.success){
+            res.json({
+                message:"Incorrect format",
+                error:parsedDatawithSuccess.error
+            })
+            return;
+        }
+        //All this four line in one line destructing
+        const {email,password,firstName,lastName} = req.body
+        
+        
+        const hashedpassword = await bcrypt.hash(password,5)
+        // console.log(hashedpassword)
+        try{
+            await UserModel.create({
+                email,
+                password:hashedpassword,
+                firstName,
+                lastName,
+            })
+        }
+        catch(e){
+            res.status(402).json({
+                error:"Your account already exists: "+e
+            })
+            return
+        }
+        res.json({
+            message:"Your are logged in"
+        })
+       
+       
+        
+    })
     userRouter.post("/signin",async (req,res)=>{
         const email=req.body.email;
         const password=req.body.password;
@@ -46,42 +94,6 @@
             return;
         }
         
-    })
-    userRouter.post("/signup", async (req,res)=>{
-        //user details validation 
-        //    const requiredBody
-        
-        
-        // const email = req.body.email;
-        // // console.log(email)
-        // const password = req.body.password;
-        // // console.log(password)
-        // const firstName = req.body.firstName;
-        // const lastName = req.body.lastName;
-        
-        //All this four line in one line destructing
-        const {email,password,firstName,lastName} = req.body
-        
-        
-        const hashedpassword = await bcrypt.hash(password,5)
-        // console.log(hashedpassword)
-        try{
-            await UserModel.create({
-                email,
-                password:hashedpassword,
-                firstName,
-                lastName,
-            })
-        }
-        catch(e){
-            res.status(402).json({
-                error:"Your account already exists: "+e
-            })
-            return
-        }
-        res.json({
-            message:"Your are logged in"
-        })
     })
     userRouter.get("/purchases",userMiddleware,async (req,res)=>{
         const userId = req.userId;

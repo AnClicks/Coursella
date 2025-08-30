@@ -15,10 +15,12 @@ courseRouter.post("/purchase",userMiddleware,async (req,res)=>{
 //   console.log(userId)
   const courseId = req.body.courseId;
   try{
-   await PurchaseModel.create({
-        userId,
-        courseId
-    })
+  //  await PurchaseModel.create({
+  //       userId,
+  //       courseId
+  //   })
+  
+  //using refrals in MongoDb
     res.status(200).json({
         message:"Congratulation you succefully purchased a course"
     })
