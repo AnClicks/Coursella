@@ -11,7 +11,7 @@ Zod Library is used for type validation.
 <br/>
 
 <p align="center">
-  <img src="/readme_assets/zod.jpeg" alt="zod Screenshot" width="80%" />
+  <img src="/readme_assets/zod.jpeg" alt="zod Screenshot" width="40%" />
 </p>
 
 <br/>
